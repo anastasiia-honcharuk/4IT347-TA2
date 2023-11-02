@@ -1,4 +1,6 @@
 import requests
+from typing import List
+from fastapi import HTTPException
 
 class YelpAPIWrapper:
     def __init__(self, base_url):
@@ -17,3 +19,17 @@ class YelpAPIWrapper:
             return response.json()
         else:
             raise Exception(f"Failed to get business information: {response.status_code} - {response.text}")
+        
+    def search_businesses(self,city, include_details=False):
+        url = f"{self.base_url}/search"
+        params = {
+            "city": city,
+            "include_details": include_details
+        }
+
+        response = requests.get(url, params=params)
+        if response.status_code == 200:
+            return response.json()
+        else:
+            raise Exception(f"Failed to get business information: {response.status_code} - {response.text}")
+
