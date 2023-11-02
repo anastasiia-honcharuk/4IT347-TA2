@@ -1,6 +1,5 @@
 from fastapi import FastAPI, HTTPException
 from download_azure import download_json_from_azure
-import json
 
 app = FastAPI()
 
@@ -22,3 +21,18 @@ def read_business(business_id: str, city: str, include_details: bool = False):
                 }
     
     raise HTTPException(status_code=404, detail="Business not found.")
+
+@app.get("/search")
+def search_businesses(city: str, categories: List[str] = None, postal_code: str = None):
+    matching_businesses = []
+
+    for business in data:
+        if (categories is None or any(category in business["categories"] for category in categories)) and \
+            (city is None or business["city"] == city) and \
+            (postal_code is None or business["postal_code"] == postal_code):
+            matching_businesses.append(business)
+
+    if not matching_businesses:
+        raise HTTPException(status_code=404, detail="No businesses found")
+
+    return matching_businesses
