@@ -1,10 +1,13 @@
 from fastapi import FastAPI, HTTPException
+from download_azure import download_json_from_azure
 import json
 
 app = FastAPI()
 
-with open("yelp.json", "r") as file:
-    data = json.load(file)
+connection_string = "DefaultEndpointsProtocol=https;AccountName=nameanastasiia;AccountKey=C/wgcXy6LwCZ8TLxaaW0kQyyGH93t3xwTOIdhVv5oBf5V0vUM4U3JYvYSk2GrdfvAZSTuYYS63D8+AStAmv89w==;EndpointSuffix=core.windows.net"
+container_name = "yelp"
+blob_name = "yelpdata"
+data = download_json_from_azure(connection_string, container_name, blob_name)
 
 @app.get("/business")
 def read_business(business_id: str, city: str, include_details: bool = False):
