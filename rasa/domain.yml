@@ -2,33 +2,75 @@ version: "3.1"
 
 intents:
   - greet
-  - goodbye
+  - restaurant_search
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
+  - inform
+  - request_restaurant
+  - ask_time
+
+entities:
+  - cuisine
+  - sorting
+
+slots:
+  cuisine:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: cuisine
+  is_open:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
+  sorting:
+    type: text
+    influence_conversation: false
+    mappings:
+      - type: from_entity
+        entity: sorting
 
 responses:
   utter_greet:
-  - text: "Hey! How are you?"
+    - text: "Hello, I am FoodleBot! I can help to find a restaurant that meets your demands :) How can I help you?"
+  utter_ask_cuisine:
+    - text: "Let me find a perfect restaurant for you! What cuisine do you prefer?"
+    - text: "Let's start then! Tell me, what cuisine would you like?"
+  utter_ask_is_open:
+    - text: "Are you looking only for {cuisine} restaurants that are open right now?"
+    - text: "I see... Do you want to search only for {cuisine} restaurants that are open right now?"
+  utter_ask_sorting:
+    - text: "Almost done! How do you want me to sort the restaurants? The results can be sorted by best match, rating, or review count."
+    - text: "Last question, how should I sort the restaurants? (best match, review count, rating)"
+  utter_submit:
+    - text: |-
+        All done!
+        I am going to run a restaurant search using the following parameters:
+        - Cuisine: {cuisine}, Available: {is_open}, Sort type: {sorting}
 
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+actions:
+  - utter_greet
+  - utter_ask_cuisine
+  - utter_ask_is_open
+  - utter_ask_sorting
+  - utter_submit
+  - action_check_and_print
+  - action_show_time
 
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+forms:
+  restaurant_form:
+    required_slots:
+      - cuisine
+      - is_open
+      - sorting
 
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  carry_over_slots_to_new_session: false

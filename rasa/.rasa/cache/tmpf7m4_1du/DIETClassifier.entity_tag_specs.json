@@ -1,0 +1,28 @@
+[
+  {
+    "tag_name": "entity",
+    "ids_to_tags": {
+      "1": "B-cuisine",
+      "2": "I-cuisine",
+      "3": "L-cuisine",
+      "4": "U-cuisine",
+      "5": "B-sorting",
+      "6": "I-sorting",
+      "7": "L-sorting",
+      "8": "U-sorting",
+      "0": "O"
+    },
+    "tags_to_ids": {
+      "B-cuisine": 1,
+      "I-cuisine": 2,
+      "L-cuisine": 3,
+      "U-cuisine": 4,
+      "B-sorting": 5,
+      "I-sorting": 6,
+      "L-sorting": 7,
+      "U-sorting": 8,
+      "O": 0
+    },
+    "num_tags": 9
+  }
+]

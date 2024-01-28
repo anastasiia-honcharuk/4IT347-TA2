@@ -6,7 +6,7 @@ import re
 
 app = FastAPI()
 
-connection_string = "DefaultEndpointsProtocol=https;AccountName=nameanastasiia;AccountKey=C/wgcXy6LwCZ8TLxaaW0kQyyGH93t3xwTOIdhVv5oBf5V0vUM4U3JYvYSk2GrdfvAZSTuYYS63D8+AStAmv89w==;EndpointSuffix=core.windows.net"
+connection_string = "DefaultEndpointsProtocol=https;AccountName=nameanastasiia;AccountKey=CJGQWF1RfeouAbLVDp8RCr+1wcRlisk8JASJt4kaIDoqVczT22tllrv1RTP5SdoepvNqASrmztMz+ASt0D6O/w==;EndpointSuffix=core.windows.net"
 container_name = "yelp"
 blob_name = "yelpdata"
 data = download_json_from_azure(connection_string, container_name, blob_name)
