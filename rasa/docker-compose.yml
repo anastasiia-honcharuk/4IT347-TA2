@@ -21,7 +21,7 @@ services:
       - rasa_actions
     networks:
       - rasa_bot
-    stdin_open: true  # Add this line to enable TTY
+    stdin_open: true
     tty: true
 networks:
   rasa_bot:
