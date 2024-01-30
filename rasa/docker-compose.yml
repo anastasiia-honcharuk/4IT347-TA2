@@ -1,0 +1,28 @@
+version: '3'
+services:
+  rasa_actions:
+    image: rasa-actions
+    build:
+      context: .
+      dockerfile: ./Dockerfile.actions
+    volumes:
+      - .:/app
+    networks:
+      - rasa_bot
+
+  rasa_shell:
+    image: rasa-shell
+    build:
+      context: .
+      dockerfile: ./Dockerfile.shell
+    volumes:
+      - .:/app
+    depends_on:
+      - rasa_actions
+    networks:
+      - rasa_bot
+    stdin_open: true  # Add this line to enable TTY
+    tty: true
+networks:
+  rasa_bot:
+    external: true

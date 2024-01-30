@@ -1,0 +1,11 @@
+FROM python:3.8
+
+WORKDIR /app
+
+COPY . /app
+
+RUN pip install rasa
+
+ENTRYPOINT ["/bin/bash", "-c"]
+
+CMD ["rasa shell"]
