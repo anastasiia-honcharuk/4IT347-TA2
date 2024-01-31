@@ -14,8 +14,8 @@ def send_message_to_rasa(message):
 
 # Streamlit UI
 def main():
-    st.title("FoodleBot: Restaurant Search Assistant (Prague Shisha University development)")
-    
+    st.title("FoodleBot: Restaurant Search Assistant")
+
     user_input = st.text_input("Type your message here and press enter:")
 
     if user_input:
@@ -24,7 +24,7 @@ def main():
 
         # Display bot responses
         for response in bot_responses:
-            st.text_area("FoodleShishaBot:", value=response.get("text", ""), height=100, disabled=True)
+            st.text_area("FoodleBot:", value=response.get("text", ""), height=100, disabled=True)
 
 if __name__ == "__main__":
     main()
